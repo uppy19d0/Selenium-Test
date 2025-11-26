@@ -1,5 +1,11 @@
+# URL base del entorno a probar
+base_url: https://plataformavirtual.itla.edu.do
+
 #chrome/firefox/edge
 browser: firefox
 
-#True/False (muestra navegador mientra esta haciendo la prueba y si esta true no lo muestra, por que quiero se haga rapido o sin interfaz)
-headless: False
+# True/False (si es true no abre ventana, ideal para CI)
+headless: false
+
+# Timeout en segundos para esperas explícitas
+wait_timeout: 10

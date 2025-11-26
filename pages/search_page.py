@@ -1,52 +1,51 @@
+from selenium.common.exceptions import TimeoutException
+from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support import expected_conditions as EC
-from pages.base_page import BasePage
+
 from data.locators import SearchPageLocators
+from pages.base_page import BasePage
 
 
 class SearchPage(BasePage):
-
-    def __init__(self, driver, wait):
+    def __init__(self, driver, wait, base_url: str):
         super().__init__(driver, wait)
-        self.url = "https://plataformavirtual.itla.edu.do"
+        self.url = base_url.rstrip("/")
         self.locator = SearchPageLocators
 
-# daniel
-        # //agregar inventario
-        # //editar inventario
-        #//notificacion
-        # 5/3 HISTORIAS DE USUARIOS
-
-        # //10 HOSTORIAS DE USUARIOS
-
-    def go_to_search_page(self):
+    def open(self):
         self.go_to_page(self.url)
 
-    # //command + click o ctrl + click
-    # //caso de prueba rechazo o cuando el usuario no existe/credenciales incorrecta
-    # [test case]fallido
-    def make_a_login_fail(self, input_user, input_password):
-        self.driver.find_element(*self.locator.SEARCH_INPUT_USER).send_keys(input_user) #COLOCAR EL USUARIO  INCORRECTO
-        self.driver.find_element(*self.locator.SEARCH_INPUT_PASSWORD).send_keys(input_password) #COLOCAR EL PASSOWRD INCORRECTO
-        self.driver.find_element(*self.locator.CHECKBOX_REMEMBERME).click() #CLICK AL CHECKBOX REMEMBER ME
-        self.driver.find_element(*self.locator.SEARCH_BUTTON).click() #CLICK AL  BUTON DE LOGIN
-        self.wait.until(EC.presence_of_element_located(self.locator.BUTTON_RESULT))
-        self.driver.save_screenshot("results/fail_login.png")
+    def login(self, username: str, password: str, remember_me: bool = False):
+        self.fill(self.locator.USERNAME_INPUT, username)
+        self.fill(self.locator.PASSWORD_INPUT, password)
+        self.set_remember_me(remember_me)
+        self.click(self.locator.LOGIN_BUTTON)
 
-    # //caso de prueba existo o con un usuario real o existente 
-    def make_a_login_pass(self, input_user, input_password):
-        self.driver.save_screenshot("results/intro_page.png")
-        self.driver.find_element(*self.locator.SEARCH_INPUT_USER).send_keys(input_user)
-        self.driver.save_screenshot("results/insert_user.png")
-        self.driver.find_element(*self.locator.SEARCH_INPUT_PASSWORD).send_keys(input_password)
-        self.driver.save_screenshot("results/password.png")
-        self.driver.find_element(*self.locator.CHECKBOX_REMEMBERME).click() #CLICK AL CHECKBOX REMEMBER ME
-        self.driver.save_screenshot("results/checkbok_click.png")
-        self.driver.find_element(*self.locator.SEARCH_BUTTON).click()
-        self.driver.save_screenshot("results/login.png")
-        self.driver.find_element(*self.locator.RESULTS).click()
-        self.driver.save_screenshot("results/droplist.png")
-        self.wait.until(EC.presence_of_element_located(self.locator.BUTTON_LOGOUT))
-        self.driver.find_element(*self.locator.BUTTON_LOGOUT).click()
-        self.driver.save_screenshot("results/logout.png")
+    def set_remember_me(self, enable: bool) -> WebElement:
+        checkbox = self.wait.until(EC.element_to_be_clickable(self.locator.REMEMBER_ME_CHECKBOX))
+        if checkbox.is_selected() != enable:
+            checkbox.click()
+        return checkbox
 
+    def is_login_error_displayed(self, timeout: int = 5) -> bool:
+        return self.is_visible(self.locator.ERROR_MESSAGE, timeout)
 
+    def is_login_form_visible(self) -> bool:
+        return self.is_visible(self.locator.LOGIN_BUTTON, timeout=5)
+
+    def is_logged_in(self) -> bool:
+        return self.is_visible(self.locator.USER_MENU_TOGGLE, timeout=10)
+
+    def open_user_menu(self):
+        return self.click(self.locator.USER_MENU_TOGGLE)
+
+    def logout(self):
+        self.open_user_menu()
+        self.click(self.locator.LOGOUT_BUTTON)
+
+    def get_validation_message(self, locator) -> str:
+        try:
+            element = self.wait.until(EC.presence_of_element_located(locator))
+        except TimeoutException:
+            return ""
+        return element.get_attribute("validationMessage") or ""
