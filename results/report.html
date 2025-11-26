@@ -429,7 +429,7 @@ function filterTable(elem) { // eslint-disable-line no-unused-vars
 }
 </script>
     <h1>Selenium UI Test Report</h1>
-    <p>Report generated on 25-Nov-2025 at 23:47:19 by <a href="https://pypi.python.org/pypi/pytest-html">pytest-html</a> v3.1.1</p>
+    <p>Report generated on 26-Nov-2025 at 00:01:42 by <a href="https://pypi.python.org/pypi/pytest-html">pytest-html</a> v3.1.1</p>
     <h2>Environment</h2>
     <table id="environment">
       <tr>
@@ -442,69 +442,155 @@ function filterTable(elem) { // eslint-disable-line no-unused-vars
         <td>Headless</td>
         <td>False</td></tr>
       <tr>
+        <td>Report generated</td>
+        <td>2025-11-26 00:00:45</td></tr>
+      <tr>
         <td>Wait timeout (s)</td>
         <td>10</td></tr></table>
     <h2>Summary</h2>
-    <p>5 tests ran in 69.30 seconds. </p>
+    <style>
+body {font-family: &apos;Inter&apos;,&apos;Segoe UI&apos;,&apos;Helvetica Neue&apos;,Arial,sans-serif; background:#0c1220; color:#e5e7eb; margin:0; padding:18px;}
+a {color:#38bdf8;}
+#environment {display:none;}
+.report-header {background:radial-gradient(circle at 10% 20%,rgba(99,102,241,0.35),transparent 30%),linear-gradient(135deg,#0ea5e9,#6366f1); color:#fff; padding:18px 22px; border-radius:18px; margin-bottom:18px; box-shadow:0 14px 28px rgba(0,0,0,0.3);}
+.report-title {margin:0; font-size:26px; font-weight:800; letter-spacing:0.2px;}
+.report-subtitle {margin:8px 0 14px; color:rgba(255,255,255,0.92);}
+.report-meta {display:flex; gap:10px; flex-wrap:wrap;}
+.meta-chip {background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.2); padding:7px 11px; border-radius:12px; font-size:12px;}
+.summary-grid {display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:12px; margin:12px 0 18px;}
+.summary-card {background:#0f172a; border:1px solid #1f2937; padding:12px 14px; border-radius:12px; box-shadow:0 12px 24px rgba(0,0,0,0.22);}
+.summary-card .label {font-size:12px; color:#94a3b8; margin-bottom:4px;}
+.summary-card .value {font-size:15px; font-weight:700; color:#e2e8f0;}
+.status-grid {display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:12px; margin:12px 0 14px;}
+.stat-card {background:linear-gradient(145deg,#0d1628,#0f172a); border:1px solid #1f2937; border-left:6px solid #38bdf8; padding:12px 14px; border-radius:12px; display:flex; justify-content:space-between; align-items:flex-end; box-shadow:0 12px 22px rgba(0,0,0,0.24);}
+.stat-card .label {font-size:12px; color:#94a3b8;}
+.stat-card .value {font-size:20px; font-weight:800; color:#e2e8f0;}
+.stat-card .sub {font-size:12px; color:#9ca3af;}
+.stat-card.passed {border-left-color:#22c55e;}
+.stat-card.failed {border-left-color:#ef4444;}
+.stat-card.skipped {border-left-color:#facc15;}
+.stat-card.error {border-left-color:#fb923c;}
+#summary {display:none;}
+#results-table {width:100%; border-collapse:collapse; overflow:hidden; border-radius:14px; box-shadow:0 16px 30px rgba(0,0,0,0.28);}
+#results-table th {background:#0f172a; color:#e5e7eb; padding:11px; border:1px solid #1f2937; text-align:left;}
+#results-table td {padding:10px 11px; border:1px solid #1f2937; background:#0b1323;}
+#results-table tr:nth-child(even) td {background:#0d152a;}
+#results-table tr:hover td {background:#111a2f;}
+.status-badge {padding:6px 12px; border-radius:999px; font-size:12px; font-weight:800; text-transform:capitalize; letter-spacing:0.2px;}
+.status-badge.passed {background:#16a34a1a; color:#22c55e; border:1px solid #14532d;}
+.status-badge.failed {background:#ef44441a; color:#ef4444; border:1px solid #7f1d1d;}
+.status-badge.error {background:#f973161a; color:#fb923c; border:1px solid #c2410c;}
+.status-badge.skipped {background:#eab3081a; color:#facc15; border:1px solid #854d0e;}
+.col-description {max-width:420px;}
+.evidence {display:flex; gap:10px; flex-wrap:wrap;}
+.evidence-item {background:#0f172a; border:1px solid #1f2937; border-radius:12px; padding:8px; display:flex; align-items:center; gap:8px; box-shadow:0 8px 16px rgba(0,0,0,0.2);}
+.evidence-item img {height:68px; width:auto; border-radius:10px; border:1px solid #1f2937; object-fit:cover;}
+.evidence-label {font-size:12px; color:#e2e8f0; font-weight:600;}
+.muted {color:#9ca3af;}
+</style>
+    <div class="report-header">
+      <h1 class="report-title">Selenium UI Test Report</h1>
+      <p class="report-subtitle">Ejecución automatizada de UI con Selenium + Pytest</p>
+      <div class="report-meta"><span class="meta-chip">Base URL: https://plataformavirtual.itla.edu.do</span><span class="meta-chip">Navegador: firefox</span><span class="meta-chip">Headless: False</span><span class="meta-chip">Timeout: 10s</span><span class="meta-chip">Generado: 2025-11-26 00:01:42</span></div></div>
+    <div class="status-grid">
+      <div class="stat-card passed">
+        <div class="label">Aprobadas</div>
+        <div class="value">5</div></div>
+      <div class="stat-card failed">
+        <div class="label">Fallidas</div>
+        <div class="value">0</div></div>
+      <div class="stat-card error">
+        <div class="label">Errores</div>
+        <div class="value">0</div></div>
+      <div class="stat-card skipped">
+        <div class="label">Omitidas</div>
+        <div class="value">0</div></div>
+      <div class="stat-card">
+        <div class="label">Duración total</div>
+        <div class="value">11.48s</div>
+        <div class="sub">Reloj: N/D</div></div>
+      <div class="stat-card">
+        <div class="label">Total</div>
+        <div class="value">5</div></div></div>
+    <div class="summary-grid">
+      <div class="summary-card">
+        <div class="label">Base URL</div>
+        <div class="value">https://plataformavirtual.itla.edu.do</div></div>
+      <div class="summary-card">
+        <div class="label">Navegador</div>
+        <div class="value">firefox</div></div>
+      <div class="summary-card">
+        <div class="label">Headless</div>
+        <div class="value">False</div></div>
+      <div class="summary-card">
+        <div class="label">Timeout (s)</div>
+        <div class="value">10</div></div></div>
+    <p>5 tests ran in 56.55 seconds. </p>
     <p class="filter" hidden="true">(Un)check the boxes to filter the results.</p><input checked="true" class="filter" data-test-result="passed" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="passed">5 passed</span>, <input checked="true" class="filter" data-test-result="skipped" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="skipped">0 skipped</span>, <input checked="true" class="filter" data-test-result="failed" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="failed">0 failed</span>, <input checked="true" class="filter" data-test-result="error" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="error">0 errors</span>, <input checked="true" class="filter" data-test-result="xfailed" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="xfailed">0 expected failures</span>, <input checked="true" class="filter" data-test-result="xpassed" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="xpassed">0 unexpected passes</span>
     <h2>Results</h2>
     <table id="results-table">
       <thead id="results-table-head">
         <tr>
-          <th class="sortable result initial-sort" col="result">Result</th>
-          <th>Description</th>
-          <th class="sortable" col="name">Test</th>
-          <th class="sortable" col="duration">Duration</th>
-          <th class="sortable links" col="links">Links</th></tr>
+          <th>Resultado</th>
+          <th>Descripción</th>
+          <th>Prueba</th>
+          <th>Duración</th>
+          <th class="sortable links" col="links">Links</th>
+          <th>Evidencia</th></tr>
         <tr hidden="true" id="not-found-message">
-          <th colspan="5">No results found. Try to check the filters</th></tr></thead>
+          <th colspan="6">No results found. Try to check the filters</th></tr></thead>
       <tbody class="passed results-table-row">
         <tr>
-          <td class="col-result">Passed</td>
-          <td>Login muestra error cuando la contraseña es incorrecta.</td>
+          <td class="col-result"><span class="status-badge passed">Aprobada</span></td>
+          <td class="col-description">Login muestra error cuando la contraseña es incorrecta.</td>
           <td class="col-name">tests/test_search.py::test_login_with_invalid_password_shows_error</td>
-          <td class="col-duration">15.19</td>
-          <td class="col-links"></td></tr>
+          <td class="col-duration">9.18</td>
+          <td class="col-links"></td>
+          <td class="col-evidence"><span class="muted">Sin adjuntos</span></td></tr>
         <tr>
-          <td class="extra" colspan="5">
+          <td class="extra" colspan="6">
             <div class="empty log">No log output captured.</div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
-          <td class="col-result">Passed</td>
-          <td>Validación al intentar iniciar sesión sin contraseña.</td>
+          <td class="col-result"><span class="status-badge passed">Aprobada</span></td>
+          <td class="col-description">Validación al intentar iniciar sesión sin contraseña.</td>
           <td class="col-name">tests/test_search.py::test_login_without_password_shows_validation</td>
-          <td class="col-duration">12.55</td>
-          <td class="col-links"></td></tr>
+          <td class="col-duration">9.50</td>
+          <td class="col-links"></td>
+          <td class="col-evidence"><span class="muted">Sin adjuntos</span></td></tr>
         <tr>
-          <td class="extra" colspan="5">
+          <td class="extra" colspan="6">
             <div class="empty log">No log output captured.</div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
-          <td class="col-result">Passed</td>
-          <td>Validación al intentar iniciar sesión sin usuario.</td>
+          <td class="col-result"><span class="status-badge passed">Aprobada</span></td>
+          <td class="col-description">Validación al intentar iniciar sesión sin usuario.</td>
           <td class="col-name">tests/test_search.py::test_login_without_username_shows_validation</td>
-          <td class="col-duration">15.39</td>
-          <td class="col-links"></td></tr>
+          <td class="col-duration">10.39</td>
+          <td class="col-links"></td>
+          <td class="col-evidence"><span class="muted">Sin adjuntos</span></td></tr>
         <tr>
-          <td class="extra" colspan="5">
+          <td class="extra" colspan="6">
             <div class="empty log">No log output captured.</div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
-          <td class="col-result">Passed</td>
-          <td>Flujo completo: login exitoso y logout.</td>
+          <td class="col-result"><span class="status-badge passed">Aprobada</span></td>
+          <td class="col-description">Flujo completo: login exitoso y logout.</td>
           <td class="col-name">tests/test_search.py::test_user_can_login_and_logout</td>
-          <td class="col-duration">16.56</td>
-          <td class="col-links"></td></tr>
+          <td class="col-duration">16.99</td>
+          <td class="col-links"></td>
+          <td class="col-evidence"><span class="muted">Sin adjuntos</span></td></tr>
         <tr>
-          <td class="extra" colspan="5">
+          <td class="extra" colspan="6">
             <div class="empty log">No log output captured.</div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
-          <td class="col-result">Passed</td>
-          <td>El checkbox de &apos;Recordar usuario&apos; permite activarse y desactivarse.</td>
+          <td class="col-result"><span class="status-badge passed">Aprobada</span></td>
+          <td class="col-description">El checkbox de &apos;Recordar usuario&apos; permite activarse y desactivarse.</td>
           <td class="col-name">tests/test_search.py::test_remember_me_can_be_toggled</td>
-          <td class="col-duration">9.55</td>
-          <td class="col-links"></td></tr>
+          <td class="col-duration">10.44</td>
+          <td class="col-links"></td>
+          <td class="col-evidence"><span class="muted">Sin adjuntos</span></td></tr>
         <tr>
-          <td class="extra" colspan="5">
+          <td class="extra" colspan="6">
             <div class="empty log">No log output captured.</div></td></tr></tbody></table></body></html>

@@ -16,4 +16,4 @@
 
 ## Ejecución de pruebas
 - Ejecuta `pytest` desde la raíz del proyecto.
-- El reporte HTML se genera en `results/report.html` con metadatos, descripciones y capturas automáticas en fallos.
+- El reporte HTML se genera en `results/report.html` (self-contained) con estilo profesional, resumen de entorno, descripciones, badges de estado, miniaturas de evidencia y capturas automáticas (incluye URL y título de página al fallar).
