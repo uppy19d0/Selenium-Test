@@ -5,7 +5,7 @@ base_url: https://plataformavirtual.itla.edu.do
 browser: firefox
 
 # True/False (si es true no abre ventana, ideal para CI)
-headless: false
+headless: true
 
 # Timeout en segundos para esperas explícitas
 wait_timeout: 10

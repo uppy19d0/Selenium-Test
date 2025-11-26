@@ -428,10 +428,13 @@ function filterTable(elem) { // eslint-disable-line no-unused-vars
     notFoundMessage.hidden = !allRowsHidden;
 }
 </script>
-    <h1>Selenium UI Test Report</h1>
-    <p>Report generated on 26-Nov-2025 at 00:01:42 by <a href="https://pypi.python.org/pypi/pytest-html">pytest-html</a> v3.1.1</p>
+    <h1>Prueba automatizada - Tarea 4 ITLA</h1>
+    <p>Report generated on 26-Nov-2025 at 00:26:34 by <a href="https://pypi.python.org/pypi/pytest-html">pytest-html</a> v3.1.1</p>
     <h2>Environment</h2>
     <table id="environment">
+      <tr>
+        <td>Autor</td>
+        <td>Luis A. Tavarez</td></tr>
       <tr>
         <td>Base URL</td>
         <td><a href="https://plataformavirtual.itla.edu.do" target="_blank">https://plataformavirtual.itla.edu.do</a></td></tr>
@@ -439,94 +442,181 @@ function filterTable(elem) { // eslint-disable-line no-unused-vars
         <td>Browser</td>
         <td>firefox</td></tr>
       <tr>
+        <td>Equipo</td>
+        <td>Pruebas Automatizadas ITLA</td></tr>
+      <tr>
         <td>Headless</td>
-        <td>False</td></tr>
+        <td>True</td></tr>
       <tr>
         <td>Report generated</td>
-        <td>2025-11-26 00:00:45</td></tr>
+        <td>2025-11-26 00:25:53</td></tr>
+      <tr>
+        <td>Reporte</td>
+        <td>Prueba automatizada - Tarea 4 ITLA</td></tr>
+      <tr>
+        <td>Versión</td>
+        <td>1.0.0</td></tr>
       <tr>
         <td>Wait timeout (s)</td>
         <td>10</td></tr></table>
     <h2>Summary</h2>
-    <style>
-body {font-family: &apos;Inter&apos;,&apos;Segoe UI&apos;,&apos;Helvetica Neue&apos;,Arial,sans-serif; background:#0c1220; color:#e5e7eb; margin:0; padding:18px;}
-a {color:#38bdf8;}
-#environment {display:none;}
-.report-header {background:radial-gradient(circle at 10% 20%,rgba(99,102,241,0.35),transparent 30%),linear-gradient(135deg,#0ea5e9,#6366f1); color:#fff; padding:18px 22px; border-radius:18px; margin-bottom:18px; box-shadow:0 14px 28px rgba(0,0,0,0.3);}
-.report-title {margin:0; font-size:26px; font-weight:800; letter-spacing:0.2px;}
-.report-subtitle {margin:8px 0 14px; color:rgba(255,255,255,0.92);}
-.report-meta {display:flex; gap:10px; flex-wrap:wrap;}
-.meta-chip {background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.2); padding:7px 11px; border-radius:12px; font-size:12px;}
-.summary-grid {display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:12px; margin:12px 0 18px;}
-.summary-card {background:#0f172a; border:1px solid #1f2937; padding:12px 14px; border-radius:12px; box-shadow:0 12px 24px rgba(0,0,0,0.22);}
-.summary-card .label {font-size:12px; color:#94a3b8; margin-bottom:4px;}
-.summary-card .value {font-size:15px; font-weight:700; color:#e2e8f0;}
-.status-grid {display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:12px; margin:12px 0 14px;}
-.stat-card {background:linear-gradient(145deg,#0d1628,#0f172a); border:1px solid #1f2937; border-left:6px solid #38bdf8; padding:12px 14px; border-radius:12px; display:flex; justify-content:space-between; align-items:flex-end; box-shadow:0 12px 22px rgba(0,0,0,0.24);}
-.stat-card .label {font-size:12px; color:#94a3b8;}
-.stat-card .value {font-size:20px; font-weight:800; color:#e2e8f0;}
-.stat-card .sub {font-size:12px; color:#9ca3af;}
-.stat-card.passed {border-left-color:#22c55e;}
-.stat-card.failed {border-left-color:#ef4444;}
-.stat-card.skipped {border-left-color:#facc15;}
-.stat-card.error {border-left-color:#fb923c;}
-#summary {display:none;}
-#results-table {width:100%; border-collapse:collapse; overflow:hidden; border-radius:14px; box-shadow:0 16px 30px rgba(0,0,0,0.28);}
-#results-table th {background:#0f172a; color:#e5e7eb; padding:11px; border:1px solid #1f2937; text-align:left;}
-#results-table td {padding:10px 11px; border:1px solid #1f2937; background:#0b1323;}
-#results-table tr:nth-child(even) td {background:#0d152a;}
-#results-table tr:hover td {background:#111a2f;}
-.status-badge {padding:6px 12px; border-radius:999px; font-size:12px; font-weight:800; text-transform:capitalize; letter-spacing:0.2px;}
-.status-badge.passed {background:#16a34a1a; color:#22c55e; border:1px solid #14532d;}
-.status-badge.failed {background:#ef44441a; color:#ef4444; border:1px solid #7f1d1d;}
-.status-badge.error {background:#f973161a; color:#fb923c; border:1px solid #c2410c;}
-.status-badge.skipped {background:#eab3081a; color:#facc15; border:1px solid #854d0e;}
+    <div class="page">
+      <style>
+* { box-sizing: border-box; }
+body {font-family:&apos;Segoe UI&apos;,&apos;Inter&apos;,&apos;Helvetica Neue&apos;,Arial,sans-serif; background:#f4f6fb; color:#1f2937; margin:0; padding:24px;}
+a {color:#0ea5e9;}
+.page {max-width:1200px; margin:0 auto;}
+.header {background:#ffffff; border-radius:16px; padding:28px 30px; margin-bottom:22px; box-shadow:0 12px 32px rgba(0,0,0,0.08); border:1px solid #e5e7eb;}
+.header h1 {color:#0f172a; font-size:2.2em; margin:0 0 8px; font-weight:800; letter-spacing:0.2px;}
+.header .subtitle {color:#475569; font-size:1.05em; margin-bottom:16px;}
+.meta-info {display:flex; justify-content:flex-start; flex-wrap:wrap; gap:12px; margin-top:12px;}
+.meta-item {background:#f8fafc; padding:12px 16px; border-radius:12px; border:1px solid #e2e8f0;}
+.meta-item strong {color:#0f172a; display:block; font-size:0.85em; margin-bottom:4px; letter-spacing:0.3px;}
+.meta-item span {color:#1f2937; font-size:1em; font-weight:700;}
+.container {background:#ffffff; border-radius:16px; padding:24px 26px; box-shadow:0 12px 32px rgba(0,0,0,0.08); margin-bottom:22px; border:1px solid #e5e7eb;}
+.exec-summary {background:linear-gradient(135deg,#0ea5e920,#0ea5e910); border:1px solid #bae6fd; border-left:6px solid #0ea5e9; padding:20px; border-radius:12px; margin-bottom:20px;}
+.exec-summary h2 {color:#0f172a; margin:0 0 10px; font-size:1.2em;}
+.exec-summary p, .exec-summary ul {color:#334155; line-height:1.6;}
+.exec-summary ul {padding-left:18px; margin:8px 0 12px;}
+.badge {display:inline-block; padding:6px 12px; border-radius:14px; color:#0f172a; font-weight:700; margin-right:8px; border:1px solid #e2e8f0; background:#f8fafc;}
+.badge.pass {border-color:#22c55e; color:#14532d; background:#dcfce7;}
+.badge.fail {border-color:#f97316; color:#7c2d12; background:#ffedd5;}
+.badge.skip {border-color:#eab308; color:#854d0e; background:#fef9c3;}
+.stats-grid {display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:14px; margin:16px 0;}
+.stat-card {background:linear-gradient(135deg,#1d4ed8,#0ea5e9); color:#fff; padding:18px; border-radius:12px; text-align:left; box-shadow:0 10px 26px rgba(0,0,0,0.12); transition:transform 0.2s ease;}
+.stat-card:hover {transform:translateY(-3px);}
+.stat-number {font-size:1.9em; font-weight:800; margin-bottom:4px;}
+.stat-label {font-size:0.95em; opacity:0.9;}
+.passed {background:linear-gradient(135deg,#16a34a,#22c55e);}
+.failed {background:linear-gradient(135deg,#e11d48,#f97316);}
+.skipped {background:linear-gradient(135deg,#ca8a04,#facc15);}
+.error {background:linear-gradient(135deg,#8b5cf6,#6366f1);}
+.progress-container {margin:18px 0;}
+.progress-bar {width:100%; height:16px; background:#e2e8f0; border-radius:10px; overflow:hidden; box-shadow:inset 0 2px 4px rgba(0,0,0,0.08);}
+.progress-fill {height:100%; background:linear-gradient(90deg,#22c55e,#0ea5e9); transition:width 0.6s ease; display:flex; align-items:center; justify-content:center; color:#fff; font-weight:700; font-size:0.85em;}
+#results-table {width:100%; border-collapse:collapse; margin:16px 0; border-radius:12px; overflow:hidden; box-shadow:0 8px 22px rgba(0,0,0,0.08);}
+#results-table th {background:#0f172a; color:#fff; padding:14px; text-align:left; font-weight:700; letter-spacing:0.2px;}
+#results-table td {padding:12px 14px; border-bottom:1px solid #e2e8f0;}
+#results-table tr:nth-child(even) td {background:#f8fafc;}
+#results-table tr:hover td {background:#e0f2fe;}
+.status-badge {padding:6px 12px; border-radius:18px; font-size:0.85em; font-weight:800; text-transform:uppercase; letter-spacing:0.3px;}
+.status-badge.passed {background:#dcfce7; color:#166534;}
+.status-badge.failed {background:#fee2e2; color:#991b1b;}
+.status-badge.error {background:#ffe4e6; color:#9f1239;}
+.status-badge.skipped {background:#fef9c3; color:#854d0e;}
 .col-description {max-width:420px;}
-.evidence {display:flex; gap:10px; flex-wrap:wrap;}
-.evidence-item {background:#0f172a; border:1px solid #1f2937; border-radius:12px; padding:8px; display:flex; align-items:center; gap:8px; box-shadow:0 8px 16px rgba(0,0,0,0.2);}
-.evidence-item img {height:68px; width:auto; border-radius:10px; border:1px solid #1f2937; object-fit:cover;}
-.evidence-label {font-size:12px; color:#e2e8f0; font-weight:600;}
-.muted {color:#9ca3af;}
+.case-id {font-weight:800; color:#0f172a;}
+.case-node {color:#64748b; font-size:12px;}
+.evidence {display:flex; gap:8px; flex-wrap:wrap;}
+.evidence-item {background:#f8fafc; border-radius:12px; padding:8px; display:flex; align-items:center; gap:8px; border:1px solid #e2e8f0;}
+.evidence-item img {height:72px; width:auto; border-radius:10px; border:1px solid #e2e8f0; object-fit:cover;}
+.evidence-label {font-size:12px; color:#0f172a; font-weight:600;}
+.evidence-link {display:inline-flex; align-items:center; gap:6px; padding:6px 12px; border-radius:14px; background:#e2e8f0; color:#0f172a; font-size:0.85em; text-decoration:none; font-weight:700;}
+.evidence-link:hover {background:#cbd5e1;}
+.lightbox {position:fixed; inset:0; background:rgba(0,0,0,0.75); display:none; align-items:center; justify-content:center; z-index:9999; padding:40px 20px;}
+.lightbox.open {display:flex;}
+.lightbox-content {max-width:90%; max-height:90%; background:#0f172a; border-radius:12px; overflow:hidden; box-shadow:0 20px 45px rgba(0,0,0,0.45); display:flex; flex-direction:column;}
+.lightbox img {max-width:100%; max-height:70vh; object-fit:contain; background:#000;}
+.lightbox-footer {padding:16px 20px; color:#e2e8f0; display:flex; justify-content:space-between; align-items:center; gap:16px; flex-wrap:wrap;}
+.lightbox-footer span {font-size:0.95em;}
+.close-modal {background:#ef4444; border:none; color:#fff; padding:8px 16px; border-radius:6px; cursor:pointer; font-weight:700;}
+.footer {background:#fff; border-radius:12px; padding:16px; text-align:center; color:#64748b; box-shadow:0 5px 15px rgba(0,0,0,0.08); margin-top:18px; border:1px solid #e5e7eb;}
 </style>
-    <div class="report-header">
-      <h1 class="report-title">Selenium UI Test Report</h1>
-      <p class="report-subtitle">Ejecución automatizada de UI con Selenium + Pytest</p>
-      <div class="report-meta"><span class="meta-chip">Base URL: https://plataformavirtual.itla.edu.do</span><span class="meta-chip">Navegador: firefox</span><span class="meta-chip">Headless: False</span><span class="meta-chip">Timeout: 10s</span><span class="meta-chip">Generado: 2025-11-26 00:01:42</span></div></div>
-    <div class="status-grid">
-      <div class="stat-card passed">
-        <div class="label">Aprobadas</div>
-        <div class="value">5</div></div>
-      <div class="stat-card failed">
-        <div class="label">Fallidas</div>
-        <div class="value">0</div></div>
-      <div class="stat-card error">
-        <div class="label">Errores</div>
-        <div class="value">0</div></div>
-      <div class="stat-card skipped">
-        <div class="label">Omitidas</div>
-        <div class="value">0</div></div>
-      <div class="stat-card">
-        <div class="label">Duración total</div>
-        <div class="value">11.48s</div>
-        <div class="sub">Reloj: N/D</div></div>
-      <div class="stat-card">
-        <div class="label">Total</div>
-        <div class="value">5</div></div></div>
-    <div class="summary-grid">
-      <div class="summary-card">
-        <div class="label">Base URL</div>
-        <div class="value">https://plataformavirtual.itla.edu.do</div></div>
-      <div class="summary-card">
-        <div class="label">Navegador</div>
-        <div class="value">firefox</div></div>
-      <div class="summary-card">
-        <div class="label">Headless</div>
-        <div class="value">False</div></div>
-      <div class="summary-card">
-        <div class="label">Timeout (s)</div>
-        <div class="value">10</div></div></div>
-    <p>5 tests ran in 56.55 seconds. </p>
-    <p class="filter" hidden="true">(Un)check the boxes to filter the results.</p><input checked="true" class="filter" data-test-result="passed" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="passed">5 passed</span>, <input checked="true" class="filter" data-test-result="skipped" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="skipped">0 skipped</span>, <input checked="true" class="filter" data-test-result="failed" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="failed">0 failed</span>, <input checked="true" class="filter" data-test-result="error" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="error">0 errors</span>, <input checked="true" class="filter" data-test-result="xfailed" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="xfailed">0 expected failures</span>, <input checked="true" class="filter" data-test-result="xpassed" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="xpassed">0 unexpected passes</span>
+      <div class="report-header">
+        <h1 class="report-title">🧪 Prueba automatizada - Tarea 4 ITLA</h1>
+        <p class="report-subtitle">Pruebas automatizadas - Tarea 4 ITLA</p>
+        <div class="report-meta"><span class="meta-chip">Versión: 1.0.0</span><span class="meta-chip">Fecha: 2025-11-26</span><span class="meta-chip">Hora: 00:26:34</span><span class="meta-chip">Equipo: Pruebas Automatizadas ITLA</span><span class="meta-chip">Autor: Luis A. Tavarez</span><span class="meta-chip">Base URL: https://plataformavirtual.itla.edu.do</span></div></div>
+      <div class="exec-summary">
+        <h2>📊 Resumen Ejecutivo</h2>
+        <p>Se ejecutaron 5 pruebas con una tasa de éxito de 100.0%. El tiempo total de ejecución fue de 5.44 segundos.</p>
+        <ul>
+          <li>✅ 5 pruebas exitosas.</li>
+          <li>❌ 0 fallidas.</li>
+          <li>⏭️ 0 omitidas.</li></ul>
+        <div><span class="badge pass">✅ 5 Exitosas</span><span class="badge fail">❌ 0 Fallidas</span><span class="badge skip">⏭️ 0 Omitidas</span></div></div>
+      <div class="stats-grid">
+        <div class="stat-card passed">
+          <div class="stat-number">5</div>
+          <div class="stat-label">Pruebas Exitosas</div></div>
+        <div class="stat-card failed">
+          <div class="stat-number">0</div>
+          <div class="stat-label">Pruebas Fallidas</div></div>
+        <div class="stat-card skipped">
+          <div class="stat-number">0</div>
+          <div class="stat-label">Pruebas Omitidas</div></div>
+        <div class="stat-card">
+          <div class="stat-number">100.0%</div>
+          <div class="stat-label">Tasa de Éxito</div></div></div>
+      <div class="progress-container container">
+        <h3>🎯 Progreso General</h3>
+        <div class="progress-bar">
+          <div class="progress-fill" data-width="100.0%">100.0%</div></div></div>
+      <div class="summary-grid">
+        <div class="summary-card">
+          <div class="label">Base URL</div>
+          <div class="value">https://plataformavirtual.itla.edu.do</div></div>
+        <div class="summary-card">
+          <div class="label">Navegador</div>
+          <div class="value">firefox</div></div>
+        <div class="summary-card">
+          <div class="label">Headless</div>
+          <div class="value">True</div></div>
+        <div class="summary-card">
+          <div class="label">Timeout (s)</div>
+          <div class="value">10</div></div></div></div>
+    <div aria-hidden="true" class="lightbox" id="evidence-modal">
+      <div class="lightbox-content"><img alt="Evidencia de prueba" loading="lazy" src=""/>
+        <div class="lightbox-footer"><span class="modal-caption">Evidencia de prueba</span>
+          <button class="close-modal" type="button">Cerrar</button></div></div></div>
+    <script>
+    document.addEventListener(&apos;DOMContentLoaded&apos;, function() {
+        const progressBar = document.querySelector(&apos;.progress-fill&apos;);
+        if (progressBar) {
+            setTimeout(() =&gt; {
+                progressBar.style.width = progressBar.dataset.width || &apos;0%&apos;;
+            }, 200);
+        }
+        const modal = document.querySelector(&apos;#evidence-modal&apos;);
+        const modalImage = modal ? modal.querySelector(&apos;img&apos;) : null;
+        const modalCaption = modal ? modal.querySelector(&apos;.modal-caption&apos;) : null;
+        const closeButton = modal ? modal.querySelector(&apos;.close-modal&apos;) : null;
+        const openModal = (src, label) =&gt; {
+            if (!modal || !modalImage) return;
+            modalImage.src = src;
+            modalImage.alt = label || &apos;Evidencia&apos;;
+            if (modalCaption) modalCaption.textContent = label || &apos;Evidencia&apos;;
+            modal.classList.add(&apos;open&apos;);
+            document.body.classList.add(&apos;lightbox-open&apos;);
+        };
+        const closeModal = () =&gt; {
+            if (!modal) return;
+            modal.classList.remove(&apos;open&apos;);
+            document.body.classList.remove(&apos;lightbox-open&apos;);
+            if (modalImage) modalImage.src = &apos;&apos;;
+        };
+        document.querySelectorAll(&apos;[data-evidence]&apos;).forEach(link =&gt; {
+            link.addEventListener(&apos;click&apos;, event =&gt; {
+                event.preventDefault();
+                const imagePath = link.getAttribute(&apos;data-evidence&apos;);
+                if (!imagePath) return;
+                const label = link.getAttribute(&apos;data-label&apos;) || &apos;Evidencia&apos;;
+                openModal(imagePath, label);
+            });
+        });
+        if (modal) {
+            modal.addEventListener(&apos;click&apos;, event =&gt; {
+                if (event.target === modal) closeModal();
+            });
+        }
+        if (closeButton) {
+            closeButton.addEventListener(&apos;click&apos;, closeModal);
+        }
+        document.addEventListener(&apos;keydown&apos;, event =&gt; {
+            if (event.key === &apos;Escape&apos;) closeModal();
+        });
+    });
+    </script>
+    <div class="footer">© 2025 Pruebas Automatizadas ITLA | Prueba automatizada - Tarea 4 ITLA</div>
     <h2>Results</h2>
     <table id="results-table">
       <thead id="results-table-head">
@@ -543,8 +633,11 @@ a {color:#38bdf8;}
         <tr>
           <td class="col-result"><span class="status-badge passed">Aprobada</span></td>
           <td class="col-description">Login muestra error cuando la contraseña es incorrecta.</td>
-          <td class="col-name">tests/test_search.py::test_login_with_invalid_password_shows_error</td>
-          <td class="col-duration">9.18</td>
+          <td class="col-name">
+            <div>
+              <div class="case-id">Login With Invalid Password Shows Error</div>
+              <div class="case-node">tests/test_search.py::test_login_with_invalid_password_shows_error</div></div></td>
+          <td class="col-duration">10.20</td>
           <td class="col-links"></td>
           <td class="col-evidence"><span class="muted">Sin adjuntos</span></td></tr>
         <tr>
@@ -554,8 +647,11 @@ a {color:#38bdf8;}
         <tr>
           <td class="col-result"><span class="status-badge passed">Aprobada</span></td>
           <td class="col-description">Validación al intentar iniciar sesión sin contraseña.</td>
-          <td class="col-name">tests/test_search.py::test_login_without_password_shows_validation</td>
-          <td class="col-duration">9.50</td>
+          <td class="col-name">
+            <div>
+              <div class="case-id">Login Without Password Shows Validation</div>
+              <div class="case-node">tests/test_search.py::test_login_without_password_shows_validation</div></div></td>
+          <td class="col-duration">8.95</td>
           <td class="col-links"></td>
           <td class="col-evidence"><span class="muted">Sin adjuntos</span></td></tr>
         <tr>
@@ -565,8 +661,11 @@ a {color:#38bdf8;}
         <tr>
           <td class="col-result"><span class="status-badge passed">Aprobada</span></td>
           <td class="col-description">Validación al intentar iniciar sesión sin usuario.</td>
-          <td class="col-name">tests/test_search.py::test_login_without_username_shows_validation</td>
-          <td class="col-duration">10.39</td>
+          <td class="col-name">
+            <div>
+              <div class="case-id">Login Without Username Shows Validation</div>
+              <div class="case-node">tests/test_search.py::test_login_without_username_shows_validation</div></div></td>
+          <td class="col-duration">6.19</td>
           <td class="col-links"></td>
           <td class="col-evidence"><span class="muted">Sin adjuntos</span></td></tr>
         <tr>
@@ -576,8 +675,11 @@ a {color:#38bdf8;}
         <tr>
           <td class="col-result"><span class="status-badge passed">Aprobada</span></td>
           <td class="col-description">Flujo completo: login exitoso y logout.</td>
-          <td class="col-name">tests/test_search.py::test_user_can_login_and_logout</td>
-          <td class="col-duration">16.99</td>
+          <td class="col-name">
+            <div>
+              <div class="case-id">User Can Login And Logout</div>
+              <div class="case-node">tests/test_search.py::test_user_can_login_and_logout</div></div></td>
+          <td class="col-duration">8.90</td>
           <td class="col-links"></td>
           <td class="col-evidence"><span class="muted">Sin adjuntos</span></td></tr>
         <tr>
@@ -587,8 +689,11 @@ a {color:#38bdf8;}
         <tr>
           <td class="col-result"><span class="status-badge passed">Aprobada</span></td>
           <td class="col-description">El checkbox de &apos;Recordar usuario&apos; permite activarse y desactivarse.</td>
-          <td class="col-name">tests/test_search.py::test_remember_me_can_be_toggled</td>
-          <td class="col-duration">10.44</td>
+          <td class="col-name">
+            <div>
+              <div class="case-id">Remember Me Can Be Toggled</div>
+              <div class="case-node">tests/test_search.py::test_remember_me_can_be_toggled</div></div></td>
+          <td class="col-duration">5.99</td>
           <td class="col-links"></td>
           <td class="col-evidence"><span class="muted">Sin adjuntos</span></td></tr>
         <tr>

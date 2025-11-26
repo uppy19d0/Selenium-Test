@@ -1,9 +1,9 @@
 from pathlib import Path
 from typing import Optional, Union
 
-from selenium.common.exceptions import TimeoutException
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.support.ui import WebDriverWait
+from selenium.common.exceptions import TimeoutException # type: ignore
+from selenium.webdriver.support import expected_conditions as EC # type: ignore
+from selenium.webdriver.support.ui import WebDriverWait # type: ignore
 
 
 class BasePage:

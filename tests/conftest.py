@@ -24,45 +24,73 @@ RUN_STATS: Dict[str, object] = {
     "duration": 0.0,
 }
 
+REPORT_INFO = {
+    "title": "Prueba automatizada - Tarea 4 ITLA",
+    "version": os.getenv("REPORT_VERSION", "1.0.0"),
+    "team": os.getenv("REPORT_TEAM", "Pruebas Automatizadas ITLA"),
+    "author": os.getenv("REPORT_AUTHOR", "Luis A. Tavarez"),
+}
+
 CUSTOM_CSS = """
-body {font-family: 'Inter','Segoe UI','Helvetica Neue',Arial,sans-serif; background:#0c1220; color:#e5e7eb; margin:0; padding:18px;}
-a {color:#38bdf8;}
-#environment {display:none;}
-.report-header {background:radial-gradient(circle at 10% 20%,rgba(99,102,241,0.35),transparent 30%),linear-gradient(135deg,#0ea5e9,#6366f1); color:#fff; padding:18px 22px; border-radius:18px; margin-bottom:18px; box-shadow:0 14px 28px rgba(0,0,0,0.3);}
-.report-title {margin:0; font-size:26px; font-weight:800; letter-spacing:0.2px;}
-.report-subtitle {margin:8px 0 14px; color:rgba(255,255,255,0.92);}
-.report-meta {display:flex; gap:10px; flex-wrap:wrap;}
-.meta-chip {background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.2); padding:7px 11px; border-radius:12px; font-size:12px;}
-.summary-grid {display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:12px; margin:12px 0 18px;}
-.summary-card {background:#0f172a; border:1px solid #1f2937; padding:12px 14px; border-radius:12px; box-shadow:0 12px 24px rgba(0,0,0,0.22);}
-.summary-card .label {font-size:12px; color:#94a3b8; margin-bottom:4px;}
-.summary-card .value {font-size:15px; font-weight:700; color:#e2e8f0;}
-.status-grid {display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:12px; margin:12px 0 14px;}
-.stat-card {background:linear-gradient(145deg,#0d1628,#0f172a); border:1px solid #1f2937; border-left:6px solid #38bdf8; padding:12px 14px; border-radius:12px; display:flex; justify-content:space-between; align-items:flex-end; box-shadow:0 12px 22px rgba(0,0,0,0.24);}
-.stat-card .label {font-size:12px; color:#94a3b8;}
-.stat-card .value {font-size:20px; font-weight:800; color:#e2e8f0;}
-.stat-card .sub {font-size:12px; color:#9ca3af;}
-.stat-card.passed {border-left-color:#22c55e;}
-.stat-card.failed {border-left-color:#ef4444;}
-.stat-card.skipped {border-left-color:#facc15;}
-.stat-card.error {border-left-color:#fb923c;}
-#summary {display:none;}
-#results-table {width:100%; border-collapse:collapse; overflow:hidden; border-radius:14px; box-shadow:0 16px 30px rgba(0,0,0,0.28);}
-#results-table th {background:#0f172a; color:#e5e7eb; padding:11px; border:1px solid #1f2937; text-align:left;}
-#results-table td {padding:10px 11px; border:1px solid #1f2937; background:#0b1323;}
-#results-table tr:nth-child(even) td {background:#0d152a;}
-#results-table tr:hover td {background:#111a2f;}
-.status-badge {padding:6px 12px; border-radius:999px; font-size:12px; font-weight:800; text-transform:capitalize; letter-spacing:0.2px;}
-.status-badge.passed {background:#16a34a1a; color:#22c55e; border:1px solid #14532d;}
-.status-badge.failed {background:#ef44441a; color:#ef4444; border:1px solid #7f1d1d;}
-.status-badge.error {background:#f973161a; color:#fb923c; border:1px solid #c2410c;}
-.status-badge.skipped {background:#eab3081a; color:#facc15; border:1px solid #854d0e;}
+* { box-sizing: border-box; }
+body {font-family:'Segoe UI','Inter','Helvetica Neue',Arial,sans-serif; background:#f4f6fb; color:#1f2937; margin:0; padding:24px;}
+a {color:#0ea5e9;}
+.page {max-width:1200px; margin:0 auto;}
+.header {background:#ffffff; border-radius:16px; padding:28px 30px; margin-bottom:22px; box-shadow:0 12px 32px rgba(0,0,0,0.08); border:1px solid #e5e7eb;}
+.header h1 {color:#0f172a; font-size:2.2em; margin:0 0 8px; font-weight:800; letter-spacing:0.2px;}
+.header .subtitle {color:#475569; font-size:1.05em; margin-bottom:16px;}
+.meta-info {display:flex; justify-content:flex-start; flex-wrap:wrap; gap:12px; margin-top:12px;}
+.meta-item {background:#f8fafc; padding:12px 16px; border-radius:12px; border:1px solid #e2e8f0;}
+.meta-item strong {color:#0f172a; display:block; font-size:0.85em; margin-bottom:4px; letter-spacing:0.3px;}
+.meta-item span {color:#1f2937; font-size:1em; font-weight:700;}
+.container {background:#ffffff; border-radius:16px; padding:24px 26px; box-shadow:0 12px 32px rgba(0,0,0,0.08); margin-bottom:22px; border:1px solid #e5e7eb;}
+.exec-summary {background:linear-gradient(135deg,#0ea5e920,#0ea5e910); border:1px solid #bae6fd; border-left:6px solid #0ea5e9; padding:20px; border-radius:12px; margin-bottom:20px;}
+.exec-summary h2 {color:#0f172a; margin:0 0 10px; font-size:1.2em;}
+.exec-summary p, .exec-summary ul {color:#334155; line-height:1.6;}
+.exec-summary ul {padding-left:18px; margin:8px 0 12px;}
+.badge {display:inline-block; padding:6px 12px; border-radius:14px; color:#0f172a; font-weight:700; margin-right:8px; border:1px solid #e2e8f0; background:#f8fafc;}
+.badge.pass {border-color:#22c55e; color:#14532d; background:#dcfce7;}
+.badge.fail {border-color:#f97316; color:#7c2d12; background:#ffedd5;}
+.badge.skip {border-color:#eab308; color:#854d0e; background:#fef9c3;}
+.stats-grid {display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:14px; margin:16px 0;}
+.stat-card {background:linear-gradient(135deg,#1d4ed8,#0ea5e9); color:#fff; padding:18px; border-radius:12px; text-align:left; box-shadow:0 10px 26px rgba(0,0,0,0.12); transition:transform 0.2s ease;}
+.stat-card:hover {transform:translateY(-3px);}
+.stat-number {font-size:1.9em; font-weight:800; margin-bottom:4px;}
+.stat-label {font-size:0.95em; opacity:0.9;}
+.passed {background:linear-gradient(135deg,#16a34a,#22c55e);}
+.failed {background:linear-gradient(135deg,#e11d48,#f97316);}
+.skipped {background:linear-gradient(135deg,#ca8a04,#facc15);}
+.error {background:linear-gradient(135deg,#8b5cf6,#6366f1);}
+.progress-container {margin:18px 0;}
+.progress-bar {width:100%; height:16px; background:#e2e8f0; border-radius:10px; overflow:hidden; box-shadow:inset 0 2px 4px rgba(0,0,0,0.08);}
+.progress-fill {height:100%; background:linear-gradient(90deg,#22c55e,#0ea5e9); transition:width 0.6s ease; display:flex; align-items:center; justify-content:center; color:#fff; font-weight:700; font-size:0.85em;}
+#results-table {width:100%; border-collapse:collapse; margin:16px 0; border-radius:12px; overflow:hidden; box-shadow:0 8px 22px rgba(0,0,0,0.08);}
+#results-table th {background:#0f172a; color:#fff; padding:14px; text-align:left; font-weight:700; letter-spacing:0.2px;}
+#results-table td {padding:12px 14px; border-bottom:1px solid #e2e8f0;}
+#results-table tr:nth-child(even) td {background:#f8fafc;}
+#results-table tr:hover td {background:#e0f2fe;}
+.status-badge {padding:6px 12px; border-radius:18px; font-size:0.85em; font-weight:800; text-transform:uppercase; letter-spacing:0.3px;}
+.status-badge.passed {background:#dcfce7; color:#166534;}
+.status-badge.failed {background:#fee2e2; color:#991b1b;}
+.status-badge.error {background:#ffe4e6; color:#9f1239;}
+.status-badge.skipped {background:#fef9c3; color:#854d0e;}
 .col-description {max-width:420px;}
-.evidence {display:flex; gap:10px; flex-wrap:wrap;}
-.evidence-item {background:#0f172a; border:1px solid #1f2937; border-radius:12px; padding:8px; display:flex; align-items:center; gap:8px; box-shadow:0 8px 16px rgba(0,0,0,0.2);}
-.evidence-item img {height:68px; width:auto; border-radius:10px; border:1px solid #1f2937; object-fit:cover;}
-.evidence-label {font-size:12px; color:#e2e8f0; font-weight:600;}
-.muted {color:#9ca3af;}
+.case-id {font-weight:800; color:#0f172a;}
+.case-node {color:#64748b; font-size:12px;}
+.evidence {display:flex; gap:8px; flex-wrap:wrap;}
+.evidence-item {background:#f8fafc; border-radius:12px; padding:8px; display:flex; align-items:center; gap:8px; border:1px solid #e2e8f0;}
+.evidence-item img {height:72px; width:auto; border-radius:10px; border:1px solid #e2e8f0; object-fit:cover;}
+.evidence-label {font-size:12px; color:#0f172a; font-weight:600;}
+.evidence-link {display:inline-flex; align-items:center; gap:6px; padding:6px 12px; border-radius:14px; background:#e2e8f0; color:#0f172a; font-size:0.85em; text-decoration:none; font-weight:700;}
+.evidence-link:hover {background:#cbd5e1;}
+.lightbox {position:fixed; inset:0; background:rgba(0,0,0,0.75); display:none; align-items:center; justify-content:center; z-index:9999; padding:40px 20px;}
+.lightbox.open {display:flex;}
+.lightbox-content {max-width:90%; max-height:90%; background:#0f172a; border-radius:12px; overflow:hidden; box-shadow:0 20px 45px rgba(0,0,0,0.45); display:flex; flex-direction:column;}
+.lightbox img {max-width:100%; max-height:70vh; object-fit:contain; background:#000;}
+.lightbox-footer {padding:16px 20px; color:#e2e8f0; display:flex; justify-content:space-between; align-items:center; gap:16px; flex-wrap:wrap;}
+.lightbox-footer span {font-size:0.95em;}
+.close-modal {background:#ef4444; border:none; color:#fff; padding:8px 16px; border-radius:6px; cursor:pointer; font-weight:700;}
+.footer {background:#fff; border-radius:12px; padding:16px; text-align:center; color:#64748b; box-shadow:0 5px 15px rgba(0,0,0,0.08); margin-top:18px; border:1px solid #e5e7eb;}
 """
 
 load_dotenv()
@@ -152,6 +180,10 @@ def pytest_configure(config):
             "Browser": settings["browser"],
             "Headless": settings["headless"],
             "Wait timeout (s)": settings["wait_timeout"],
+            "Reporte": REPORT_INFO["title"],
+            "Versión": REPORT_INFO["version"],
+            "Equipo": REPORT_INFO["team"],
+            "Autor": REPORT_INFO["author"],
             "Report generated": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
         }
     )
@@ -162,7 +194,7 @@ def pytest_configure(config):
 
 
 def pytest_html_report_title(report):
-    report.title = "Selenium UI Test Report"
+    report.title = REPORT_INFO["title"]
 
 
 @pytest.hookimpl(tryfirst=True, hookwrapper=True)
@@ -170,7 +202,8 @@ def pytest_runtest_makereport(item, call):
     """Attach description and screenshots to the HTML report."""
     outcome = yield
     report = outcome.get_result()
-    report.description = str(item.function.__doc__ or "").strip()
+    report.description = str(item.function.__doc__ or "Sin descripción").strip()
+    report.case_id = _case_identifier(item)
 
     if report.when != "call":
         return
@@ -219,6 +252,7 @@ def pytest_html_results_table_header(cells):
 def pytest_html_results_table_row(report, cells):
     cells[0] = html.td(_status_badge(report), class_="col-result")
     cells.insert(1, html.td(report.description, class_="col-description"))
+    cells[2] = html.td(_case_cell(report), class_="col-name")
     cells.append(html.td(_evidence_cell(report), class_="col-evidence"))
 
 
@@ -226,29 +260,40 @@ def pytest_html_results_summary(prefix, summary, postfix):
     """Add a compact resumen de entorno al inicio del reporte."""
     settings = load_settings()
     generated = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    metrics = _compute_metrics()
     hero = html.div(
         [
-            html.h1("Selenium UI Test Report", class_="report-title"),
-            html.p("Ejecución automatizada de UI con Selenium + Pytest", class_="report-subtitle"),
+            html.h1(f"🧪 {REPORT_INFO['title']}", class_="report-title"),
+            html.p("Pruebas automatizadas - Tarea 4 ITLA", class_="report-subtitle"),
             html.div(
                 [
+                    html.span(f"Versión: {REPORT_INFO['version']}", class_="meta-chip"),
+                    html.span(f"Fecha: {generated.split(' ')[0]}", class_="meta-chip"),
+                    html.span(f"Hora: {generated.split(' ')[1]}", class_="meta-chip"),
+                    html.span(f"Equipo: {REPORT_INFO['team']}", class_="meta-chip"),
+                    html.span(f"Autor: {REPORT_INFO['author']}", class_="meta-chip"),
                     html.span(f"Base URL: {settings['base_url']}", class_="meta-chip"),
-                    html.span(f"Navegador: {settings['browser']}", class_="meta-chip"),
-                    html.span(f"Headless: {settings['headless']}", class_="meta-chip"),
-                    html.span(f"Timeout: {settings['wait_timeout']}s", class_="meta-chip"),
-                    html.span(f"Generado: {generated}", class_="meta-chip"),
                 ],
                 class_="report-meta",
             ),
         ],
         class_="report-header",
     )
-    prefix[0:0] = [
+    exec_summary = _build_exec_summary(metrics)
+    stats_grid = _build_stats_cards(metrics)
+    progress = _build_progress(metrics)
+    content = [
         html.style(CUSTOM_CSS),
         hero,
-        _build_status_cards(),
+        exec_summary,
+        stats_grid,
+        progress,
         _build_env_cards(settings),
     ]
+    prefix[0:0] = [html.div(content, class_="page")]
+    summary.clear()
+    postfix.extend(_build_lightbox())
+    postfix.append(_build_footer())
 
 
 def _status_badge(report):
@@ -281,14 +326,20 @@ def _evidence_cell(report):
             image = html.img(src=content, alt=name)
             items.append(
                 html.div(
-                    [html.a(image, href=content, target="_blank"), html.span(name, class_="evidence-label")],
+                    [
+                        html.a(image, href=content, target="_blank", **{"data-evidence": content, "data-label": name, "class": "evidence-link"}),
+                        html.span(name, class_="evidence-label"),
+                    ],
                     class_="evidence-item image",
                 )
             )
         elif extra_format == "url" and content:
             items.append(
                 html.div(
-                    [html.span("Link", class_="evidence-label"), html.a(name, href=content, target="_blank", class_="meta-chip")],
+                    [
+                        html.span("Link", class_="evidence-label"),
+                        html.a(name, href=content, target="_blank", class_="evidence-link", **{"data-evidence": content, "data-label": name}),
+                    ],
                     class_="evidence-item link",
                 )
             )
@@ -315,44 +366,15 @@ def _increment(key: str):
 
 
 def _build_status_cards():
-    counts = RUN_STATS["counts"]
-    total = sum(counts.values())
-    duration = RUN_STATS.get("duration", 0.0)
-    wall_clock = None
-    if RUN_STATS.get("start") and RUN_STATS.get("end"):
-        wall_clock = (RUN_STATS["end"] - RUN_STATS["start"]).total_seconds()
-
+    metrics = _compute_metrics()
     cards = [
-        html.div(
-            [html.div("Aprobadas", class_="label"), html.div(str(counts.get("passed", 0)), class_="value")],
-            class_="stat-card passed",
-        ),
-        html.div(
-            [html.div("Fallidas", class_="label"), html.div(str(counts.get("failed", 0)), class_="value")],
-            class_="stat-card failed",
-        ),
-        html.div(
-            [html.div("Errores", class_="label"), html.div(str(counts.get("error", 0)), class_="value")],
-            class_="stat-card error",
-        ),
-        html.div(
-            [html.div("Omitidas", class_="label"), html.div(str(counts.get("skipped", 0)), class_="value")],
-            class_="stat-card skipped",
-        ),
-        html.div(
-            [
-                html.div("Duración total", class_="label"),
-                html.div(f"{duration:.2f}s", class_="value"),
-                html.div("Reloj: " + (f"{wall_clock:.2f}s" if wall_clock else "N/D"), class_="sub"),
-            ],
-            class_="stat-card",
-        ),
-        html.div(
-            [html.div("Total", class_="label"), html.div(str(total), class_="value")],
-            class_="stat-card",
-        ),
+        html.div([html.div("Pruebas Exitosas", class_="stat-label"), html.div(str(metrics["passed"]), class_="stat-number")], class_="stat-card passed"),
+        html.div([html.div("Pruebas Fallidas", class_="stat-label"), html.div(str(metrics["failed"]), class_="stat-number")], class_="stat-card failed"),
+        html.div([html.div("Pruebas Omitidas", class_="stat-label"), html.div(str(metrics["skipped"]), class_="stat-number")], class_="stat-card skipped"),
+        html.div([html.div("Errores", class_="stat-label"), html.div(str(metrics["error"]), class_="stat-number")], class_="stat-card error"),
+        html.div([html.div("Tasa de Éxito", class_="stat-label"), html.div(f"{metrics['pass_rate']:.1f}%", class_="stat-number")], class_="stat-card"),
     ]
-    return html.div(cards, class_="status-grid")
+    return html.div(cards, class_="stats-grid")
 
 
 def _build_env_cards(settings):
@@ -365,3 +387,169 @@ def _build_env_cards(settings):
         ],
         class_="summary-grid",
     )
+
+
+def _build_exec_summary(metrics: Dict[str, float]):
+    total = metrics["total"]
+    pass_rate = metrics["pass_rate"]
+    duration = metrics["duration"]
+    return html.div(
+        [
+            html.h2("📊 Resumen Ejecutivo"),
+            html.p(
+                f"Se ejecutaron {total} pruebas con una tasa de éxito de {pass_rate:.1f}%. "
+                f"El tiempo total de ejecución fue de {duration:.2f} segundos."
+            ),
+            html.ul(
+                [
+                    html.li(f"✅ {metrics['passed']} pruebas exitosas."),
+                    html.li(f"❌ {metrics['failed']} fallidas."),
+                    html.li(f"⏭️ {metrics['skipped']} omitidas."),
+                ]
+            ),
+            html.div(
+                [
+                    html.span(f"✅ {metrics['passed']} Exitosas", class_="badge pass"),
+                    html.span(f"❌ {metrics['failed']} Fallidas", class_="badge fail"),
+                    html.span(f"⏭️ {metrics['skipped']} Omitidas", class_="badge skip"),
+                ]
+            ),
+        ],
+        class_="exec-summary",
+    )
+
+
+def _build_stats_cards(metrics: Dict[str, float]):
+    return html.div(
+        [
+            html.div([html.div(str(metrics["passed"]), class_="stat-number"), html.div("Pruebas Exitosas", class_="stat-label")], class_="stat-card passed"),
+            html.div([html.div(str(metrics["failed"]), class_="stat-number"), html.div("Pruebas Fallidas", class_="stat-label")], class_="stat-card failed"),
+            html.div([html.div(str(metrics["skipped"]), class_="stat-number"), html.div("Pruebas Omitidas", class_="stat-label")], class_="stat-card skipped"),
+            html.div([html.div(f"{metrics['pass_rate']:.1f}%", class_="stat-number"), html.div("Tasa de Éxito", class_="stat-label")], class_="stat-card"),
+        ],
+        class_="stats-grid",
+    )
+
+
+def _build_progress(metrics: Dict[str, float]):
+    return html.div(
+        [
+            html.h3("🎯 Progreso General"),
+            html.div(
+                html.div(f"{metrics['pass_rate']:.1f}%", class_="progress-fill", **{"data-width": f"{metrics['pass_rate']:.1f}%"}),
+                class_="progress-bar",
+            ),
+        ],
+        class_="progress-container container",
+    )
+
+
+def _case_identifier(item):
+    marker = item.get_closest_marker("case_id")
+    if marker and marker.args:
+        return str(marker.args[0])
+    return item.name.replace("test_", "").replace("_", " ").title()
+
+
+def _case_cell(report):
+    case_id = getattr(report, "case_id", report.nodeid)
+    node = getattr(report, "nodeid", "")
+    return html.div(
+        [
+            html.div(case_id, class_="case-id"),
+            html.div(node, class_="case-node"),
+        ]
+    )
+
+
+def _compute_metrics() -> Dict[str, float]:
+    counts = RUN_STATS["counts"]
+    total = sum(counts.values()) or 0
+    duration = float(RUN_STATS.get("duration", 0.0))
+    wall_clock = None
+    if RUN_STATS.get("start") and RUN_STATS.get("end"):
+        wall_clock = (RUN_STATS["end"] - RUN_STATS["start"]).total_seconds()
+    pass_rate = (counts.get("passed", 0) / total * 100) if total else 0.0
+    return {
+        "passed": counts.get("passed", 0),
+        "failed": counts.get("failed", 0),
+        "skipped": counts.get("skipped", 0),
+        "error": counts.get("error", 0),
+        "total": total,
+        "duration": duration,
+        "wall_clock": wall_clock,
+        "pass_rate": pass_rate,
+    }
+
+
+def _build_lightbox():
+    script = """
+    document.addEventListener('DOMContentLoaded', function() {
+        const progressBar = document.querySelector('.progress-fill');
+        if (progressBar) {
+            setTimeout(() => {
+                progressBar.style.width = progressBar.dataset.width || '0%';
+            }, 200);
+        }
+        const modal = document.querySelector('#evidence-modal');
+        const modalImage = modal ? modal.querySelector('img') : null;
+        const modalCaption = modal ? modal.querySelector('.modal-caption') : null;
+        const closeButton = modal ? modal.querySelector('.close-modal') : null;
+        const openModal = (src, label) => {
+            if (!modal || !modalImage) return;
+            modalImage.src = src;
+            modalImage.alt = label || 'Evidencia';
+            if (modalCaption) modalCaption.textContent = label || 'Evidencia';
+            modal.classList.add('open');
+            document.body.classList.add('lightbox-open');
+        };
+        const closeModal = () => {
+            if (!modal) return;
+            modal.classList.remove('open');
+            document.body.classList.remove('lightbox-open');
+            if (modalImage) modalImage.src = '';
+        };
+        document.querySelectorAll('[data-evidence]').forEach(link => {
+            link.addEventListener('click', event => {
+                event.preventDefault();
+                const imagePath = link.getAttribute('data-evidence');
+                if (!imagePath) return;
+                const label = link.getAttribute('data-label') || 'Evidencia';
+                openModal(imagePath, label);
+            });
+        });
+        if (modal) {
+            modal.addEventListener('click', event => {
+                if (event.target === modal) closeModal();
+            });
+        }
+        if (closeButton) {
+            closeButton.addEventListener('click', closeModal);
+        }
+        document.addEventListener('keydown', event => {
+            if (event.key === 'Escape') closeModal();
+        });
+    });
+    """
+    lightbox_markup = html.div(
+        html.div(
+            [
+                html.img(src="", alt="Evidencia de prueba", loading="lazy"),
+                html.div(
+                    [
+                        html.span("Evidencia de prueba", class_="modal-caption"),
+                        html.button("Cerrar", type="button", class_="close-modal"),
+                    ],
+                    class_="lightbox-footer",
+                ),
+            ],
+            class_="lightbox-content",
+        ),
+        id="evidence-modal",
+        **{"class": "lightbox", "aria-hidden": "true"},
+    )
+    return [lightbox_markup, html.script(script)]
+
+
+def _build_footer():
+    return html.div(f"© {datetime.now().year} {REPORT_INFO['team']} | {REPORT_INFO['title']}", class_="footer")
