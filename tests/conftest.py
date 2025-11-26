@@ -4,16 +4,16 @@ from datetime import datetime
 from pathlib import Path
 from typing import Dict, List
 
-import pytest
-from dotenv import load_dotenv
+import pytest # type: ignore
+from dotenv import load_dotenv # type: ignore
 from py.xml import html  # type: ignore
-from pytest_html import extras
-from selenium import webdriver
-from selenium.webdriver.chrome.service import Service as ServiceChrome
-from selenium.webdriver.firefox.service import Service as ServiceFirefox
-from selenium.webdriver.support.wait import WebDriverWait
-from webdriver_manager.chrome import ChromeDriverManager
-from webdriver_manager.firefox import GeckoDriverManager
+from pytest_html import extras  # type: ignore
+from selenium import webdriver  # type: ignore
+from selenium.webdriver.chrome.service import Service as ServiceChrome # type: ignore
+from selenium.webdriver.firefox.service import Service as ServiceFirefox # type: ignore
+from selenium.webdriver.support.wait import WebDriverWait   # type: ignore
+from webdriver_manager.chrome import ChromeDriverManager    # type: ignore
+from webdriver_manager.firefox import GeckoDriverManager  # type: ignore
 
 from utils.config import load_settings
 

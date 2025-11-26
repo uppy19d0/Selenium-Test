@@ -1,6 +1,5 @@
 from typing import Dict, List
-
-import pytest
+import pytest  # type: ignore
 
 from pages.search_page import SearchPage
 

@@ -1,6 +1,6 @@
-from selenium.common.exceptions import TimeoutException
-from selenium.webdriver.remote.webelement import WebElement
-from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import TimeoutException # type: ignore
+from selenium.webdriver.remote.webelement import WebElement # type: ignore
+from selenium.webdriver.support import expected_conditions as EC # type: ignore
 
 from data.locators import SearchPageLocators
 from pages.base_page import BasePage
