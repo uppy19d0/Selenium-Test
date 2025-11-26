@@ -64,6 +64,11 @@ a {color:#0ea5e9;}
 .progress-container {margin:18px 0;}
 .progress-bar {width:100%; height:16px; background:#e2e8f0; border-radius:10px; overflow:hidden; box-shadow:inset 0 2px 4px rgba(0,0,0,0.08);}
 .progress-fill {height:100%; background:linear-gradient(90deg,#22c55e,#0ea5e9); transition:width 0.6s ease; display:flex; align-items:center; justify-content:center; color:#fff; font-weight:700; font-size:0.85em;}
+.cards-grid {display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:14px; margin:12px 0 8px;}
+.card {background:#ffffff; border:1px solid #e2e8f0; border-radius:12px; padding:14px 16px; box-shadow:0 8px 20px rgba(0,0,0,0.05);}
+.card h4 {margin:0 0 6px; color:#0f172a; font-size:1em;}
+.card p {margin:2px 0; color:#334155; font-size:0.95em; line-height:1.5;}
+.table-wrap {width:100%; overflow-x:auto;}
 #results-table {width:100%; border-collapse:collapse; margin:16px 0; border-radius:12px; overflow:hidden; box-shadow:0 8px 22px rgba(0,0,0,0.08);}
 #results-table th {background:#0f172a; color:#fff; padding:14px; text-align:left; font-weight:700; letter-spacing:0.2px;}
 #results-table td {padding:12px 14px; border-bottom:1px solid #e2e8f0;}
@@ -91,6 +96,14 @@ a {color:#0ea5e9;}
 .lightbox-footer span {font-size:0.95em;}
 .close-modal {background:#ef4444; border:none; color:#fff; padding:8px 16px; border-radius:6px; cursor:pointer; font-weight:700;}
 .footer {background:#fff; border-radius:12px; padding:16px; text-align:center; color:#64748b; box-shadow:0 5px 15px rgba(0,0,0,0.08); margin-top:18px; border:1px solid #e5e7eb;}
+@media (max-width: 720px) {
+  body {padding:16px;}
+  .header, .container {padding:18px;}
+  #results-table th, #results-table td {padding:10px;}
+  .meta-info {flex-direction:column; align-items:flex-start;}
+  .stat-card {text-align:center;}
+  .lightbox-content {max-width:100%; max-height:100%;}
+}
 """
 
 load_dotenv()
@@ -219,12 +232,14 @@ def pytest_runtest_makereport(item, call):
     except Exception:
         current_url = None
 
+    screenshot_base64 = driver.get_screenshot_as_base64()
     if report.failed:
-        screenshot_base64 = driver.get_screenshot_as_base64()
         extra.append(extras.image(screenshot_base64, "base64", "Captura al fallar"))
         if current_url:
             extra.append(extras.url(current_url, name="URL al fallar"))
             extra.append(extras.text(f"Título: {driver.title}", name="Página"))
+    else:
+        extra.append(extras.image(screenshot_base64, "base64", "Captura final"))
 
     report.extra = extra
 
@@ -282,9 +297,11 @@ def pytest_html_results_summary(prefix, summary, postfix):
     exec_summary = _build_exec_summary(metrics)
     stats_grid = _build_stats_cards(metrics)
     progress = _build_progress(metrics)
+    meta_cards = _build_meta_cards(settings, metrics, generated)
     content = [
         html.style(CUSTOM_CSS),
         hero,
+        meta_cards,
         exec_summary,
         stats_grid,
         progress,
@@ -293,6 +310,7 @@ def pytest_html_results_summary(prefix, summary, postfix):
     prefix[0:0] = [html.div(content, class_="page")]
     summary.clear()
     postfix.extend(_build_lightbox())
+    postfix.append(_build_table_wrapper_script())
     postfix.append(_build_footer())
 
 
@@ -387,6 +405,39 @@ def _build_env_cards(settings):
         ],
         class_="summary-grid",
     )
+
+
+def _build_meta_cards(settings, metrics, generated):
+    cards = [
+        html.div(
+            [
+                html.h4("Contexto"),
+                html.p(f"Equipo: {REPORT_INFO['team']}"),
+                html.p(f"Autor: {REPORT_INFO['author']}"),
+                html.p(f"Fecha: {generated.split(' ')[0]} {generated.split(' ')[1]}"),
+            ],
+            class_="card",
+        ),
+        html.div(
+            [
+                html.h4("Resultados"),
+                html.p(f"Total: {metrics['total']}"),
+                html.p(f"Aprobadas: {metrics['passed']} | Fallidas: {metrics['failed']} | Omitidas: {metrics['skipped']}"),
+                html.p(f"Tasa de éxito: {metrics['pass_rate']:.1f}%"),
+            ],
+            class_="card",
+        ),
+        html.div(
+            [
+                html.h4("Ejecución"),
+                html.p(f"Navegador: {settings['browser']} | Headless: {settings['headless']}"),
+                html.p(f"Timeout espera: {settings['wait_timeout']}s"),
+                html.p(f"Duración total: {metrics['duration']:.2f}s"),
+            ],
+            class_="card",
+        ),
+    ]
+    return html.div(cards, class_="cards-grid")
 
 
 def _build_exec_summary(metrics: Dict[str, float]):
@@ -549,6 +600,27 @@ def _build_lightbox():
         **{"class": "lightbox", "aria-hidden": "true"},
     )
     return [lightbox_markup, html.script(script)]
+
+
+def _build_table_wrapper_script():
+    script = """
+    document.addEventListener('DOMContentLoaded', function() {
+        if (!document.querySelector("meta[name='viewport']")) {
+            const meta = document.createElement('meta');
+            meta.name = 'viewport';
+            meta.content = 'width=device-width, initial-scale=1';
+            document.head.appendChild(meta);
+        }
+        const table = document.querySelector('#results-table');
+        if (table && !table.parentElement.classList.contains('table-wrap')) {
+            const wrap = document.createElement('div');
+            wrap.className = 'table-wrap';
+            table.parentNode.insertBefore(wrap, table);
+            wrap.appendChild(table);
+        }
+    });
+    """
+    return html.script(script)
 
 
 def _build_footer():
