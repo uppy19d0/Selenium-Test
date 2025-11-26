@@ -18,12 +18,13 @@ class TestSearch(BaseTest):
         self.page = SearchPage(self.driver, self.wait)
         self.page.go_to_search_page()
         return username, password, failpassword
-
+    
+    #(TEST CASE - LOGIN PLATAFORMA VIRTUAL)
     def test_login_fail(self, load_pages):
         username, password,failpassword = load_pages
         self.page.make_a_login_fail(username, failpassword)
 
+    #(TEST CASE - LOGIN PLATAFORMA VIRTUAL)
     def test_login_pass(self, load_pages):
         username, password, failpassword = load_pages
         self.page.make_a_login_pass(username, password)
-

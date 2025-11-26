@@ -5,6 +5,7 @@ class SearchPageLocators:
     SEARCH_INPUT_USER = (By.XPATH, "//*[@id='username']")
     SEARCH_INPUT_PASSWORD = (By.XPATH, "//*[@id='password']")
     SEARCH_BUTTON = (By.XPATH, "//*[@id='loginbtn']")
+    CHECKBOX_REMEMBERME = (By.XPATH, "//*[@id='rememberusername']")
     BUTTON_RESULT = SEARCH_BUTTON
     RESULTS = (By.XPATH, "//*[@id='action-menu-toggle-1']")
     BUTTON_LOGOUT = (By.XPATH, "//*[@id='actionmenuaction-7']")

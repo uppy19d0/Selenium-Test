@@ -1,5 +1,5 @@
 #chrome/firefox/edge
 browser: firefox
 
-#True/False
+#True/False (muestra navegador mientra esta haciendo la prueba y si esta true no lo muestra, por que quiero se haga rapido o sin interfaz)
 headless: False
