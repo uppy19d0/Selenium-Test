@@ -1,5 +1,4 @@
-import pytest
-
+import pytest # type: ignore
 
 class BaseTest:
     """Base class to expose fixtures as attributes for class-based tests."""
