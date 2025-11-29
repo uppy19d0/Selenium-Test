@@ -1,8 +1,10 @@
+import base64
 import os
+import re
 import warnings
 from datetime import datetime
 from pathlib import Path
-from typing import Dict, List
+from typing import Dict, List, Optional
 
 import pytest # type: ignore
 from dotenv import load_dotenv # type: ignore
@@ -30,6 +32,7 @@ REPORT_INFO = {
     "team": os.getenv("REPORT_TEAM", "Pruebas Automatizadas ITLA"),
     "author": os.getenv("REPORT_AUTHOR", "Luis A. Tavarez"),
 }
+SCREENSHOTS_DIR = Path("results") / "screenshots"
 
 CUSTOM_CSS = """
 * { box-sizing: border-box; }
@@ -183,6 +186,21 @@ def wait(driver, settings):
     return WebDriverWait(driver, settings.get("wait_timeout", 10))
 
 
+@pytest.fixture
+def take_screenshot(request, driver):
+    """Helper para adjuntar capturas adicionales dentro de una prueba."""
+    captures = []
+    request.node._extra_screenshots = captures
+
+    def _capture(label: str):
+        screenshot_base64 = driver.get_screenshot_as_base64()
+        path = _save_screenshot_file(request.node, screenshot_base64, label)
+        captures.append({"label": label, "base64": screenshot_base64, "path": path})
+        request.node._extra_screenshots = captures
+
+    yield _capture
+
+
 def pytest_configure(config):
     """Add useful metadata to the HTML report."""
     settings = load_settings()
@@ -233,13 +251,28 @@ def pytest_runtest_makereport(item, call):
         current_url = None
 
     screenshot_base64 = driver.get_screenshot_as_base64()
+    screenshot_path = _save_screenshot_file(report, screenshot_base64)
+    label = "Captura al fallar" if report.failed else "Captura final"
+    if screenshot_path:
+        rel_path = screenshot_path.relative_to(Path("results")).as_posix()
+        extra.append(extras.url(rel_path, name="Archivo de captura"))
+
+    extra.append(extras.image(screenshot_base64, mime_type="image/png", name=label))
+
+    for shot in getattr(item, "_extra_screenshots", []):
+        label = (shot.get("label") or "Captura adicional").strip()
+        content = shot.get("base64")
+        shot_path = shot.get("path")
+        if shot_path:
+            rel = Path(shot_path).relative_to(Path("results")).as_posix()
+            extra.append(extras.url(rel, name=f"{label} (archivo)"))
+        if content:
+            extra.append(extras.image(content, mime_type="image/png", name=label))
+
     if report.failed:
-        extra.append(extras.image(screenshot_base64, "base64", "Captura al fallar"))
         if current_url:
             extra.append(extras.url(current_url, name="URL al fallar"))
             extra.append(extras.text(f"Título: {driver.title}", name="Página"))
-    else:
-        extra.append(extras.image(screenshot_base64, "base64", "Captura final"))
 
     report.extra = extra
 
@@ -500,6 +533,46 @@ def _case_identifier(item):
     if marker and marker.args:
         return str(marker.args[0])
     return item.name.replace("test_", "").replace("_", " ").title()
+
+
+def _save_screenshot_file(source, screenshot_base64: str, label: Optional[str] = None) -> Optional[Path]:
+    """Persist the screenshot to disk for evidence/download."""
+    SCREENSHOTS_DIR.mkdir(parents=True, exist_ok=True)
+    filename = _build_screenshot_name(source, label)
+    target = SCREENSHOTS_DIR / filename
+    try:
+        target.write_bytes(base64.b64decode(screenshot_base64))
+    except Exception:
+        return None
+    return target
+
+
+def _build_screenshot_name(source, label: Optional[str] = None) -> str:
+    case_id = ""
+    if getattr(source, "case_id", ""):
+        case_id = getattr(source, "case_id", "")
+    elif hasattr(source, "get_closest_marker"):
+        case_id = _case_identifier(source)  # type: ignore[arg-type]
+    else:
+        case_id = getattr(source, "nodeid", "") or getattr(source, "name", "")
+
+    slug = _slugify(case_id or "test")
+    label_slug = _slugify(label or "")
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    outcome = "failed" if getattr(source, "failed", False) else "passed" if getattr(source, "passed", False) else getattr(source, "outcome", "step")
+
+    parts = [slug]
+    if label_slug:
+        parts.append(label_slug)
+    parts.extend([str(outcome), timestamp])
+    return "_".join(parts) + ".png"
+
+
+def _slugify(value: str) -> str:
+    value = value.strip().lower()
+    value = re.sub(r"[^0-9a-zA-Z_-]+", "-", value)
+    value = re.sub(r"-+", "-", value).strip("-")
+    return value or "test-case"
 
 
 def _case_cell(report):
